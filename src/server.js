@@ -2,15 +2,9 @@ import express from "express";
 import configViewEngine from "./configs/viewEngine";
 import initWebRoutes from "./routes/web";
 import bodyParser from "body-parser"; //get body req
-import mysql from "mysql2"; //get client
+
 require("dotenv").config();
 
-// create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  database: 'jwt'
-});
 
 
 const app = express(); //Tạo sever
