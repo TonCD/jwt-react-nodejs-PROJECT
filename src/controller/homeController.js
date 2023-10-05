@@ -16,11 +16,17 @@ const handleCreateNewUser = (req, res) =>{
     let username = req.body.username;
 
     userService.createNewUser(email, password, username);
-    return res.send("Create");
+    return res.redirect("/user");
+}
+
+const handleDeleteUser = async (req, res) => {
+    await userService.deleteUser(req.params.id);
+    return res.redirect("/user");
 }
 
 module.exports = {
     handleHelloworld,
     handleUserPage,
-    handleCreateNewUser
+    handleCreateNewUser,
+    handleDeleteUser
 }
