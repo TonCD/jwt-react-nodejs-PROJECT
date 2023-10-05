@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Users List</title>
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -58,7 +58,9 @@
                                     <td><%= item.email %></td>
                                     <td><%= item.username %></td>
                                     <td>    
-                                        <button type="button" class="btn btn-outline-warning"> Edit </button>
+                                        <form action ="/update-user/<%= item.id %>" method="get" style="display: inline;"> 
+                                            <button type="submit" class="btn btn-outline-warning"> Edit </button>
+                                        </form>
                                         <form action ="/delete-user/<%= item.id %>" method="post" style="display: inline;">  
                                             <button type="submit" class="btn btn-outline-danger"> Delete </button>
                                         </form>
