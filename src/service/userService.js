@@ -27,41 +27,35 @@ const createNewUser = async (email, password, username) => {
 }
 
 const getUserList = async () => {
+    //Test associations
+    let newUser = await db.User.findOne({
+        where: { id: 1 },
+        attributes: ["id", "username", "email"],
+        include: { model: db.Group , attributes: ["name", "description"]},
+        raw: true,
+        nest: true
+    })
+
+    let roles = await db.Role.findAll({
+        
+        include: { model: db.Group, where: {id :1 } },
+        raw: true,
+        nest: true
+    })
+    console.log("--> Check new users: ", newUser);
+    console.log("--> Check new roles: ", roles);
+
+
 
     let users = [];
     users = await db.User.findAll(); // find All --> [{}, {}, ...]
     return users;
-    // create the connection, specify bluebird as Promise
-    // const connection = await mysql.createConnection({
-    //     host: 'localhost',
-    //     user: 'root',
-    //     database: 'jwt',
-    //     Promise: bluebird
-    // });
-    // try {
-    //     const [rows, fields] = await connection.execute('SELECT * FROM user');
-    //     return rows;
-    // } catch (error) {
-    //     console.log("Error: ", error);
-    // }
 }
 
 const deleteUser = async (userId) => {
     await db.User.destroy({
         where: { id: userId }
     })
-    // const connection = await mysql.createConnection({
-    //     host: 'localhost',
-    //     user: 'root',
-    //     database: 'jwt',
-    //     Promise: bluebird
-    // });
-    // try {
-    //     const [rows, fields] = await connection.execute('DELETE FROM user WHERE id = ? ', [id]);
-    //     return rows;
-    // } catch (error) {
-    //     console.log("Error: ", error);
-    // }
 }
 
 const getUserByID = async (id) =>{
